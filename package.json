@@ -33,7 +33,7 @@
 		"tailwindcss": "^3.3.5",
 		"vite": "^4.5.0",
 		"vitest": "^0.34.6",
-		"postinstall": "prisma generate"
+		"postinstall": "npx prisma generate"
 	},
 	"type": "module",
 	"dependencies": {
