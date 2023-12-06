@@ -9,7 +9,7 @@ export const sendConfirmationEmail = async (email, token) => {
 		}
 	});
 
-	const confirmationLink = `https://word-alchemy-nmpu11ojh-adilma53.vercel.app/confirm/${token}`;
+	const confirmationLink = `https://word-alchemy-git-adil-work-space-adilma53.vercel.app/confirm/${token}`;
 
 	const mailOptions = {
 		from: 'adil2mae@gmail.com',
@@ -36,7 +36,7 @@ export const sendResetPasswordEmail = async (email, token) => {
 		}
 	});
 
-	const resetLink = `https://word-alchemy-nmpu11ojh-adilma53.vercel.app/forgotpass/${token}`;
+	const resetLink = `https://word-alchemy-git-adil-work-space-adilma53.vercel.app/forgotpass/${token}`;
 
 	const mailOptions = {
 		from: 'adil2mae@gmail.com',
