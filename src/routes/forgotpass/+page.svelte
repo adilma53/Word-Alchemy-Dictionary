@@ -1,19 +1,13 @@
 <script>
 	export let form;
+
+	const responsive = 'md:w-[700px] m-3 md:mx-auto lg:w-[700px] lg:mx-auto rounded-lg';
 </script>
 
-<div class="bg-gray-50 dark:bg-gray-900">
+<div class="{responsive} border border-blue-300">
 	<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-		<a href="#" class="flex items-center mb-6 text-2xl font-semibold text-gray-900 dark:text-white">
-			<img
-				class="w-8 h-8 mr-2"
-				src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
-				alt="logo"
-			/>
-			Flowbite
-		</a>
 		<div
-			class="w-full p-6 bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8"
+			class="w-full p-6 bg-white rounded-lg shadow-2xl dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8"
 		>
 			<h1
 				class="mb-1 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
