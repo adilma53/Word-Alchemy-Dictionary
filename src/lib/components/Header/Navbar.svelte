@@ -52,8 +52,7 @@
 		<div class="hidden md:flex space-x-10 items-center">
 			{#if user}
 				<button
-					class="rounded-lg border-2 border-blue-300 dark:bg-blue-500/30 bg-blue-500/60 hover:bg-blue-700 dark:hover:bg-blue-700 text-base font-bold py-2 px-2"
-				>
+					class="rounded-lg border-2 border-blue-300 dark:bg-blue-500/30 bg-blue-500/60 hover:bg-blue-700 dark:hover:bg-blue-700 text-base font-bold py-2 px-2">
 					<a href="/collections">My collections</a>
 				</button>
 			{/if}
@@ -62,8 +61,7 @@
 				{#if user}
 					<button
 						on:click|preventDefault={async () => handleLogout()}
-						class="dark:bg-blue-500/30 bg-blue-500/60 hover:bg-blue-700 dark:hover:bg-blue-700 text-base font-bold py-2 px-2 rounded"
-					>
+						class="dark:bg-blue-500/30 bg-blue-500/60 hover:bg-blue-700 dark:hover:bg-blue-700 text-base font-bold py-2 px-2 rounded">
 						Logout
 					</button>
 				{:else}
@@ -78,8 +76,7 @@
 			--line-width="4px"
 			{open}
 			on:click={() => (open = !open)}
-			class="  md:hidden lg:hidden"
-		/>
+			class="  md:hidden lg:hidden" />
 	</div>
 </nav>
 
@@ -87,21 +84,18 @@
 
 {#if open}
 	<div
-		class="m-3 dark:bg-gray-900 bg-gray-50 md:hidden lg:hidden space-y-2 p-3 border border-blue-300 rounded-lg flex flex-col space-x-10 items-center"
-	>
-		{#if true}
+		class="m-3 dark:bg-gray-900 bg-gray-50 md:hidden lg:hidden space-y-2 p-3 border border-blue-400 rounded-lg flex flex-col space-x-10 items-center">
+		{#if user}
 			<button
-				class="w-1/2 rounded-lg border-2 border-blue-300 dark:bg-blue-500/30 hover:text-white hover:bg-blue-700 dark:hover:bg-blue-700 text-base font-bold py-2 px-2"
-			>
+				class="w-1/2 rounded-lg border-2 border-blue-400 dark:bg-transparent dark:hover:bg-blue-400 hover:text-white text-base font-bold py-2 px-2">
 				<a href="/collections">My collections</a>
 			</button>
 		{/if}
 
-		{#if true}
+		{#if user}
 			<button
 				on:click|preventDefault={async () => handleLogout()}
-				class="w-1/2 dark:bg-blue-500/30 bg-blue-500/60 hover:bg-blue-700 hover:text-white dark:hover:bg-blue-700 text-base font-bold py-2 px-2 rounded"
-			>
+				class="w-1/2 border-blue-400 dark:bg-blue-400 dark:hover:bg-blue-400 dark:hover:bg-blue-700 text-base font-bold py-2 px-2 rounded">
 				Logout
 			</button>
 		{:else}

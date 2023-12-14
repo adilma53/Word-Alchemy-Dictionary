@@ -43,21 +43,17 @@
 				<em class="font-normal text-base text-blue-600 mx-3 my-3">{phonetic.text}</em>
 			</div>
 			{#each data.meanings as meaning}
-				<div class="w-full border pt-5 flex flex-row justify-end">
-					<h1
-						style="white-space: nowrap;"
-						class="flex border border-blue-300 flex font-bold md:text-2xl italic text-xl"
-					>
-						{meaning.partOfSpeech} ionginfef
+				<div class="w-full pt-5 flex flex-row justify-end">
+					<h1 style="white-space: nowrap;" class="flex font-bold md:text-2xl italic text-xl">
+						{meaning.partOfSpeech}
 					</h1>
 					<hr class="w-full mx-3 border-1 border-blue-300 my-4" />
 				</div>
 
-				<div class="border border-red-300">
+				<div class="">
 					<h2 class="md:text-2xl pt-4 text-base font-semibold italic">Meaning</h2>
 					<ul
-						class="pt-5 text-sm md:text-base marker:text-blue-600 font-medium list-disc list-outside"
-					>
+						class="pt-5 text-sm md:text-base marker:text-blue-600 font-medium list-disc list-outside">
 						{#each meaning.definitions as def}
 							<li class="text-base my-2 text-start leading-relaxed">
 								{def.definition}
