@@ -18,9 +18,9 @@ export const actions = {
 		const data = await request.formData();
 		const email = data.get('email'); // Assuming 'email' is the email
 		const password = data.get('password');
-		const connfirmPassword = data.get('confirm-password');
+		const confirmPassword = data.get('confirm-password');
 
-		if (password !== connfirmPassword) {
+		if (password !== confirmPassword) {
 			return fail(400, { identicalPasswords: true });
 		}
 
@@ -52,6 +52,7 @@ export const actions = {
 		// Send a confirmation email to the user
 		await sendConfirmationEmail(email, verificationToken);
 
-		throw redirect(303, '/');
+		return { success: true };
+		// throw redirect(303, '/');
 	}
 };
