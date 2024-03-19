@@ -43,7 +43,7 @@ export const actions = {
 				email,
 				password: await bcrypt.hash(password, 10),
 				session: crypto.randomUUID(),
-				role: { connect: { name: Roles.USER } },
+				role: Roles.USER,
 
 				verificationToken
 			}

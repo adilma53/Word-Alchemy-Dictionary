@@ -5,11 +5,9 @@ generator client {
   provider = "prisma-client-js"
 }
 
-
 datasource db {
   provider = "postgresql"
-  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
-  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+  url      = env("DATABASE_URL")
 }
 
 
@@ -52,8 +50,7 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  role   Roles @relation(fields: [roleId], references: [id])
-  roleId Int
+  role String @default("USER")
 
 
   collections Collection[]
@@ -61,11 +58,6 @@ model User {
 
 
 
-model Roles {
-  id   Int    @id @default(autoincrement())
-  name String @unique
-  User User[]
-}
 
 
 model Collection {
@@ -85,4 +77,10 @@ model Word {
   collection   Collection @relation(fields: [collectionId], references: [id])
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+
+enum Role {
+  USER
+  ADMIN
 }

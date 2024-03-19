@@ -3,7 +3,7 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
+		"dev": "prisma db push && vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
@@ -40,7 +40,7 @@
 		"@vercel/analytics": "^1.1.1",
 		"bcrypt": "^5.1.1",
 		"nodemailer": "^6.9.7",
-		"prisma": "^5.7.0",
+		"prisma": "^5.11.0",
 		"svelte-hamburger": "^1.0.1"
 	}
 }

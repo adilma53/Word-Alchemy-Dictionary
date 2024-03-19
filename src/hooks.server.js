@@ -30,7 +30,7 @@ export async function handle({ event, resolve }) {
 			throw redirect(303, '/');
 		}
 		if (event.url.pathname.startsWith('/dashboard/admins')) {
-			if (event.locals.user.roleId !== 1) {
+			if (event.locals.user.role !== 'ADMIN') {
 				throw redirect(303, '/dashboard');
 			}
 		}
