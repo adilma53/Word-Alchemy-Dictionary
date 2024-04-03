@@ -1,8 +1,7 @@
-# WordAlchemy
+# Aplos Dictionary
 
-![Logo](src/lib/assets/wordalchemy.svg)
 
-**WordAlchemy** is a simple sveltekit app that can be used to learn, pronounce, and look up new words.
+**Aplos Dictionary** is a simple sveltekit app that can be used to learn, pronounce, and look up new words.
 It is a Dictionary app that mixes IPA (_International Phonetic Alphabet_) and word list.
 
 # project struture explains it self:
