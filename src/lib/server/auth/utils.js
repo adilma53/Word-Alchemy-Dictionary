@@ -1,7 +1,17 @@
 import nodemailer from 'nodemailer';
 import fs from 'fs/promises';
 
+const environement = process.env.ENVIRONMENT;
 export const sendConfirmationEmail = async (email, token) => {
+	let baseUrl;
+	if (environement === 'local') {
+		baseUrl = 'http://localhost:5173';
+	}
+
+	if (environement === 'deployed') {
+		baseUrl = 'https://word-alchemy-dictionary.vercel.app';
+	}
+
 	const transporter = nodemailer.createTransport({
 		service: 'gmail',
 		auth: {
@@ -10,7 +20,7 @@ export const sendConfirmationEmail = async (email, token) => {
 		}
 	});
 
-	const confirmationLink = `https://word-alchemy-git-adil-work-space-adilma53.vercel.app/confirm/${token}`;
+	const confirmationLink = `${baseUrl}/confirm/${token}`;
 
 	const mailOptions = {
 		from: 'adil2mae@gmail.com',
