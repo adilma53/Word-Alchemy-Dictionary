@@ -2,6 +2,9 @@
 	import { Meaning } from '$lib';
 
 	export let data;
+
+	const { user, myCollections } = data;
+
 	$: phonetic = data?.phonetics;
 	$: wordefine = data?.word;
 	$: audioSource = data?.phonetics.audio;
@@ -31,4 +34,11 @@
 	<meta name="description" content={description} />
 </svelte:head>
 
-<Meaning {wordsearch} {phonetic} {audioSource} on:playaudio={playaudio} {data} />
+<Meaning
+	{wordsearch}
+	{phonetic}
+	{audioSource}
+	{user}
+	{myCollections}
+	on:playaudio={playaudio}
+	{data} />

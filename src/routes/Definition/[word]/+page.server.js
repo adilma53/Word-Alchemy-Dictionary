@@ -1,6 +1,8 @@
+import { prisma } from '../../../lib/server/prisma.js';
 import { cleanarray, capturebestphonetics } from './funchelper.js';
 import { error } from '@sveltejs/kit';
-export async function load({ fetch, params }) {
+
+export async function load({ fetch, params, locals }) {
 	let { word } = params;
 	try {
 		// Make the API request heres
@@ -20,10 +22,19 @@ export async function load({ fetch, params }) {
 		console.log('from server phonetics --->', phoneticsArray);
 		console.log('for server meaning --->', MeaningArray);
 
+		const myCollections = await prisma.collection.findMany({
+			where: { userId: locals?.user?.id },
+			include: {
+				words: true
+			}
+		});
+
 		return {
 			word: myword,
 			phonetics: phoneticsArray,
-			meanings: MeaningArray
+			meanings: MeaningArray,
+			user: locals.user,
+			myCollections
 		};
 	} catch (e) {
 		throw error(404, 'Not found');

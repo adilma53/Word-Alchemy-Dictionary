@@ -3,9 +3,16 @@
 	import { dictionaries } from '$lib/data';
 
 	export let data;
+
+	const { user, myCollections } = data;
+	console.log('🚀 ~ myCollections:', myCollections);
+
 	$: phonetic = data?.phonetics;
 	$: wordefine = data?.word;
 	$: audioSource = data?.phonetics.audio;
+
+	let showDropdown = false;
+	let selectedCollection = null;
 
 	const playaudio = () => {
 		if (audioSource) {
@@ -16,23 +23,85 @@
 		}
 	};
 
-	export let wordsearch = '';
-	export let pagetitle = '';
-	export let description = '';
-	$: {
-		wordsearch = wordefine;
-		pagetitle = `WordAlchemy | Definition of ${wordsearch}`;
-		description = `Definition page of ${wordsearch}`;
-	}
+	// const addWordToCollection = async (collectionId) => {
+	// 	try {
+	// 		const response = await fetch('/api/words', {
+	// 			method: 'POST',
+	// 			headers: {
+	// 				'Content-Type': 'application/json'
+	// 			},
+	// 			body: JSON.stringify({ word: wordefine, collectionId })
+	// 		});
+
+	// 		console.log('🚀 ~ addWordToCollection ~ response:', response);
+
+	// 		if (response.ok) {
+	// 			alert('Word added to collection successfully');
+	// 		} else {
+	// 			alert('Failed to add word to collection');
+	// 		}
+	// 	} catch (error) {
+	// 		console.error('Error adding word to collection:', error);
+	// 		alert('Error adding word to collection');
+	// 	}
+	// };
+
+	const addWord = async (collectionID, newWordName) => {
+		try {
+			const response = await fetch(`/api/words`, {
+				method: 'POST',
+				body: JSON.stringify({ name: newWordName, id: collectionID })
+			});
+
+			if (response.ok) {
+				const collection = await response.json();
+				console.log('🚀 ~ addWord ~ newWord:', collection);
+				console.log('🚀 ~ addWord ~ newWordName:', newWordName);
+
+				// collection.isCollectionWordsOpen = true;
+				// collections[collectionIndex] = newWord;
+				// collections = [...collections];
+			} else {
+				console.error('Failed to create word');
+			}
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	const handleCollectionSelect = (collectionId, newWordName) => {
+		addWord(collectionId, newWordName);
+		showDropdown = false;
+	};
 </script>
 
-<section class=" @container flex flex-col">
+<section class="@container flex flex-col">
 	<!-- * top container -->
 	{#if data}
 		<div class="flex md:items-baseline p-10 flex-col">
-			<h1 class="text-5xl font-bold">
-				{wordefine}
-			</h1>
+			<div class="w-full flex justify-between">
+				<h1 class="text-5xl font-bold">
+					{wordefine}
+				</h1>
+
+				<div class="relative">
+					<button
+						class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+						on:click={() => (showDropdown = !showDropdown)}>Add To Collection</button>
+					{#if showDropdown}
+						<div
+							class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
+							{#each myCollections as collection}
+								<button
+									class="w-full px-4 py-2 text-left hover:bg-gray-200"
+									on:click={() => handleCollectionSelect(collection.id, wordefine)}>
+									{collection.name}
+								</button>
+							{/each}
+						</div>
+					{/if}
+				</div>
+			</div>
 			<div class="flex flex-row">
 				<button on:click={playaudio}>
 					<img src={AudioIcon} alt="Audioicon" class="h-7 w-7" />
@@ -50,8 +119,7 @@
 				<div class="w-full">
 					<h2 class="md:text-2xl pt-4 text-base font-semibold italic">Meaning</h2>
 					<ul
-						class=" pt-5 text-sm md:text-base marker:text-blue-600 font-medium list-disc list-outside"
-					>
+						class="pt-5 text-sm md:text-base marker:text-blue-600 font-medium list-disc list-outside">
 						{#each meaning.definitions as def}
 							<li class="w-fit text-base my-2 text-start leading-relaxed">
 								{def.definition}
@@ -64,11 +132,11 @@
 						{/each}
 					</ul>
 					<!-- ! Synonyms -->
-					<div class=" flex flex-col space-y-4">
+					<div class="flex flex-col space-y-4">
 						<div>
 							{#if meaning.synonyms}
 								<h2 class="text-base text-gray-400 font-semibold">Synonyms</h2>
-								<div class=" text-base font-medium text-blue-700">
+								<div class="text-base font-medium text-blue-700">
 									{meaning.synonyms}
 								</div>
 							{/if}

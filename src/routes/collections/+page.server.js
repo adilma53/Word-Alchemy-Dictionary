@@ -9,7 +9,7 @@ export async function load({ locals }) {
 	// });
 
 	const myCollections = await prisma.collection.findMany({
-		where: { userId: locals?.user.id },
+		where: { userId: locals?.user?.id },
 		include: {
 			words: true
 		}
