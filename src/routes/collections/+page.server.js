@@ -1,9 +1,12 @@
-// load collections
+// import { prisma } from '../../lib/server/prisma';
 
+import { prisma } from '../../lib/server/prisma';
+
+// load collections
 export async function load({ locals }) {
-	const user = await prisma.user.findUnique({
-		where: { id: locals?.user.id }
-	});
+	// const user = await prisma.user.findUnique({
+	// 	where: { id: locals?.user.id }
+	// });
 
 	const myCollections = await prisma.collection.findMany({
 		where: { userId: locals?.user.id },
