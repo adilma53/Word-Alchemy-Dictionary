@@ -87,13 +87,13 @@
 				<div class="relative">
 					<button
 						class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
-						on:click={() => (showDropdown = !showDropdown)}>Add To Collection</button>
+						on:click={() => (showDropdown = !showDropdown)}>Add To</button>
 					{#if showDropdown}
 						<div
-							class="absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
+							class=" dark:border-slate-800 absolute right-0 mt-2 w-48 bg-white border border-gray-300 rounded-md shadow-lg">
 							{#each myCollections as collection}
 								<button
-									class="w-full px-4 py-2 text-left hover:bg-gray-200"
+									class=" w-full px-4 py-2 text-left dark:bg-slate-800 hover:bg-gray-200 dark:hover:bg-gray-700"
 									on:click={() => handleCollectionSelect(collection.id, wordefine)}>
 									{collection.name}
 								</button>

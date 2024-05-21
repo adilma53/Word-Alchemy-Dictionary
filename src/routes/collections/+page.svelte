@@ -212,7 +212,7 @@
 								{word.text}
 
 								<div class="space-x-2">
-									<button class="hover:text-gray-500 dark:hover:text-gray-900"
+									<button class="hover:text-gray-500 dark:hover:text-gray-950"
 										><a href={`/Definition/${word.text}`}>Definition</a></button>
 								</div>
 							</li>

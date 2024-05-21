@@ -41,6 +41,7 @@
 		"bcrypt": "^5.1.1",
 		"nodemailer": "^6.9.7",
 		"prisma": "^5.11.0",
-		"svelte-hamburger": "^1.0.1"
+		"svelte-hamburger": "^1.0.1",
+		"svelte-icons-pack": "^3.1.3"
 	}
 }
