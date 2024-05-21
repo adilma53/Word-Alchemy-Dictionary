@@ -6,9 +6,7 @@ export const sendConfirmationEmail = async (email, token) => {
 	let baseUrl;
 	if (environement === 'local') {
 		baseUrl = 'http://localhost:5173';
-	}
-
-	if (environement === 'deployed') {
+	} else {
 		baseUrl = 'https://word-alchemy-dictionary.vercel.app';
 	}
 
