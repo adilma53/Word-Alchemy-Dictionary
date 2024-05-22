@@ -7,6 +7,8 @@
 	export let data;
 
 	const { user, myCollections } = data;
+	console.log('🚀 ~ myCollections:', myCollections);
+	console.log('🚀 ~ myCollections words:', myCollections[0].words);
 
 	let collections = myCollections;
 	let collectionName = '';
@@ -113,6 +115,47 @@
 			console.log(error);
 		}
 	};
+
+	// async function fetchCollection(collectionID, index, isOpen) {
+	// 	try {
+	// 		const response = await fetch(`/api/collection`, {
+	// 			method: 'POST',
+	// 			body: JSON.stringify({ collectionID })
+	// 		});
+
+	// 		if (response.ok) {
+	// 			const updatedCollection = await response.json();
+	// 			console.log('🚀 ~ fetchCollection ~ updatedCollection:', updatedCollection);
+	// 			console.log('🚀 ~ fetchCollection ~ updatedCollection words:', updatedCollection.words);
+	// 			collections[index] = updatedCollection;
+	// 			collections = [...collections];
+	// 		} else {
+	// 			console.error('Failed to fetch collection');
+	// 		}
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+
+	// 	return isOpen;
+	// }
+
+	// async function fetchCollections() {
+	// try {
+	// const response = await fetch(`/api/collections`, {
+	// method: 'GET'
+	// });
+	//
+	// if (response.ok) {
+	// const updatedCollections = await response.json();
+	// console.log('🚀 ~ fetchCollections ~ updatedCollections:', updatedCollections);
+	// collections = [...updatedCollections];
+	// } else {
+	// console.error('Failed to fetch collection');
+	// }
+	// } catch (error) {
+	// console.log(error);
+	// }
+	// }
 </script>
 
 <div class="space-y-4 my-3 mx-4 flex flex-col justify-center">
@@ -158,7 +201,11 @@
 				<button
 					key={index}
 					class="flex justify-between items-center px-3 h-14 rounded-lg w-full border-2 border-blue-400"
-					on:click={() => {
+					on:click={async () => {
+						// if (collection.isCollectionWordsOpen) {
+						// 	await fetchCollection(collection.id, index);
+						// }
+
 						collection.isCollectionWordsOpen = !collection.isCollectionWordsOpen;
 					}}>
 					<span>{collection.name}</span>

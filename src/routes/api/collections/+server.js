@@ -2,22 +2,12 @@ import { redirect } from '@sveltejs/kit';
 
 import { prisma } from '../../../lib/server/prisma';
 
-export async function POST({ request, headers, cookies }) {
-	// const myHeader = headers['Authorization'];
-
+export async function POST({ request, cookies }) {
 	const { name } = await request.json();
 
-	// const authorizationHeader = headers.get('Authorization');
-
-	// console.log('your authorizationHeader ->', authorizationHeader);
-	// console.log('your myHeader ->', myHeader);
-
 	const session = cookies.get('session');
-	// const isAuthenticated = authorizationHeader === session;
 
 	if (!session) {
-		// return { status: 401, body: 'Unauthorized' };
-
 		return new Response({ body: 'Unauthorized' }, { status: 401 });
 	}
 
@@ -25,7 +15,6 @@ export async function POST({ request, headers, cookies }) {
 		where: { session }
 	});
 
-	// const { name } = JSON.parse(body);
 	const newCollection = await prisma.collection.create({
 		data: {
 			name,
@@ -35,10 +24,6 @@ export async function POST({ request, headers, cookies }) {
 			words: true
 		}
 	});
-
-	// return { status: 201, body: newCollection };
-
-	// return new Response({ body: newCollection }, { status: 201 });
 
 	return new Response(JSON.stringify(newCollection), {
 		status: 201
@@ -77,12 +62,9 @@ export async function DELETE({ request, headers, cookies }) {
 // ----------------------------------------------------
 // ----------------------------------------------------
 // ----------------------------------------------------
-export async function GET({ request, headers, cookies }) {
-	// console.log('your request ->', request);
-
-	// const authorizationHeader = headers.get('Authorization');
-
-	// console.log('your authorizationHeader ->', authorizationHeader);
+export async function GET({ request, headers, cookies, params }) {
+	// const { id } = await request.json();
+	const { id } = params;
 
 	const session = cookies.get('session');
 	// const isAuthenticated = authorizationHeader === session;
@@ -97,9 +79,20 @@ export async function GET({ request, headers, cookies }) {
 		where: { session }
 	});
 
-	const collections = await prisma.collection.findMany({
-		where: { userId: user.id }
-	});
+	// if params passed return single collection other wise return all collections
+	let collections;
+	if (id) {
+		collections = await prisma.collection.findUnique({
+			where: { id: 12, userId: user.id },
+			include: {
+				words: true
+			}
+		});
+	} else {
+		collections = await prisma.collection.findMany({
+			where: { userId: user.id }
+		});
+	}
 
 	// return { status: 200, body: JSON.stringify(collections) };
 
